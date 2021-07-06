@@ -8,7 +8,8 @@ script:
 - bundle exec rspec
 deploy:
   provider: heroku
-  api_key: $AM_HEROKU_SECURE_KEY
+  api_key:
+    secure: mSbQd40slHTsU3VMNeN5olljRN5MhYXD20yO+WOsGy69TQ524os4gPs0eZvCJoGPKlNtR6JIvacj0/lOg88UJh2RaNXfS81Tf2amYakg1zMQc5i9cchUPWmb7NRHTeWGHH0IHO4PLcQzjQtqbak/maBhgzGxcGwsIAkbQeh1jD0qwbBlJNrP2JYdTJ8vTc7SNrzQ7gPMKf5etWbevvnofUt34CN5T0K5Z+UKya0Y4/SJEviOFWEv8xxQLevp4Yz6nsrfA0dLjc3bRjDrGMgE4igs6sHgBf1WzdYvj1/Ovey+77qtjkMNbaAyid6g7G4ntOeLAYpJEzXHIqsfRR6SIBqlGIPg5ims2V1xk5wYxrTVFZCDzQCindnNf/JaktubutMg1/SQKJIE1hH5ql56bw3Vuhs+FumSaH4KqONoa5/sqh2iDYOUJrk9M1YvmukHExjYwzB1iNH8LwxQNgEUhfebe3whual7YxKw4QnBjOWnUjqtwhAPINIXlk5p8SqXNOTjtk1EJhI4QfVlRzBKd7bKZ06CiuGLfDKR/om+fU7Rek8UexmoE6TF+jy7X2QkA1AVvyN+Iu3VlOu5ZhgUHHsghdR2bjLdV/XI3PFufKWYnL3zO1EJix7LC1qXx6LmsxYfw6KZKUIun31SS//iYgB8RcYq9S3tTi6os4BfA80=
   app: glacial-scrubland-24016
   on:
     repo: aliyamerali/viewing_party
