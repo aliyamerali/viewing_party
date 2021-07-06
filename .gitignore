@@ -19,4 +19,5 @@
 # Ignore test coverage
 /coverage/*
 
-shrouded-river-95035/*
+#Ignore heroku files
+shrouded-river-95035/
