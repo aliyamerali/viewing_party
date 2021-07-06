@@ -8,6 +8,7 @@ script:
 - bundle exec rspec
 deploy:
   provider: heroku
-  api_key: e0eef0d1-74ca-4b79-9eab-fdec06ed15dc
+  api_key:
+    secure: e0eef0d1-74ca-4b79-9eab-fdec06ed15dc
   app: shrouded-river-95035
   run: rails db:migrate
