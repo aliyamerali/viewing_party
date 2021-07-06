@@ -4,12 +4,11 @@ rbenv:
 addons:
   postgresql: 9.6
 script:
-- bundle exec rails db:{create} RAILS_ENV=test
+- bundle exec rails db:{create,migrate} RAILS_ENV=test
 - bundle exec rspec
 deploy:
   provider: heroku
-  api_key:
-    secure: I07JxappBDGlkFdCIPrsYeNhQfCfLHJMRoRzHEv4lqO2G5EfvfzC5TNLT6VunU5ZFoC+QrthQE8/NYy0ZMD9gRPdXgnFNZWqoTibZW7x5VpcuCi+W5MZXQZHKsSbbWHqof2WdI6VoJiuPnsEWsqaCU2KwnbqHlsNGsoB/jNcicMcFbCA3BoJEuzyaSNSCHI2b2uUVsJZRs8EhZU5RUuRdeDX3OgE4lBi3diQKTjZtlt+y898JJTK/KBn3/nomVPWodfFf/m9Bw748xxQ31aGuHe/EGv4HnsCPQbs9whdP08QkOektRxpD6xgQ2CKLu4tHglL8dE4UOWudxUj3I/NVpeFHVnJEvM2RxLUYJVksj08ou7e/DytUWy6lQGjU7E613EfEeL2Sf75SiWlxEy6t8AJlVSd4L4Jj/EAD9tjtj/OD+e8+C9WyC7EKXNNMpQ4anN+nszWKE3BetVoT6kcPmrHKsQEU+8uakqZBHSFukxIcSqEZDNHwEtuRMgmuUdBJ03vngRSUIVY+neTMeCzoF5f8UI7g+KM31ZcaMmDMQzbgHDo+KWS8N2WjI/TA9pA2kdoFcr099ryvEjtQ6WuphsDiKhTXsjJXrjmk/cttcOe67ygsobqqfNevknMVp0D2Qsh87dy4w9UOv5+jq5M7nzbPpaotO0G6hD97g7dYrM=
+  api_key: $AM_HEROKU_SECURE_KEY
   app: glacial-scrubland-24016
   on:
     repo: aliyamerali/viewing_party
