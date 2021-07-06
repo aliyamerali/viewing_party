@@ -9,6 +9,9 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: e0eef0d1-74ca-4b79-9eab-fdec06ed15dc
-  app: shrouded-river-95035
-  run: rails db:migrate
+    secure: bwSJg04eJBH4FAlD4g7jj265/wmYB4nsw0BgO7k5wxojaoFjA19Lx5KEruWYumFP4suvbqbmnBQ1dJyFm1TvbCWytWlUgQvO698uj+B98A9Do+/CymEPZZMelzWo6sxt41Ufk8NbrlVMxSfDdmYiBp5WLvi9sjwBs4yubkbmC6YDNb4cADMrdg0NJSxSwkA6a5/BC/qnjHpyFY0atI7QhVy/1IRGSbNdiKw2H/sgkht2eVHPraKVZhBC9UXRd7qIEr7BMzqIF7iPql9Ym9ttj0c+vkCHGbIWJtV+U4ufuI5bTTCd+EkP7yJ8rUj+a8My04ie0z107N6ec/p4rormC4U0Wm3EqTFS1SS8hkMvsRetw2dVYR7uYb/E9foWqCjAEihK7NVVi1dU88Pifg1Oxg4f4POgs6arGIXqFrm+Pg9TWGvLhV1yOR9ke05fm8btv2Jl8PIIA6CO3SHjK7xa4YehROGff4wa6/iUBoctvrZe+SX8BscK6+0b40V4yQTbQBxpieFH9XEXjqrCzd5BKzesKb8QxXwmuzEl0bxmRSxhRD0M70KoB8xivvp+AADFlIcQQiQPX7gLARnHX9SvtdDSEHQHY0nGg22o6eeeghA7ZaiDcrFJ6Rxnosqg9jJs7ab3H9Ga9tkW9qc0BI9i+5n7xU7H35fvF3b27VXEPc0=
+  app: viewing_party
+  on:
+    repo: aliyamerali/viewing_party
+    branch: main
+  skip_cleanup: 'true'
