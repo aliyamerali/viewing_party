@@ -18,3 +18,5 @@
 
 # Ignore test coverage
 /coverage/*
+
+/shrouded-river-95035/*
