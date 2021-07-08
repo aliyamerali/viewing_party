@@ -15,9 +15,16 @@ RSpec.describe "Welcome page" do
   end
 
   it 'has an app description' do
-    expect(page).to have_selector("description")
+    expect(page).to have_css(".description")
   end
 
-  it 'has a button to login'
-  it 'has a link to register'
+  it 'has a button to login' do
+    expect(page).to have_field("Email")
+    expect(page).to have_field("Password")
+    expect(page).to have_button("Sign In")
+  end
+
+  it 'has a link to register' do
+    expect(page).to have_link("New to Viewing Party? Register Here.", :href=>"/register" )
+  end
 end
