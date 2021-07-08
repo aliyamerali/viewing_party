@@ -1,15 +1,11 @@
 <h1>Welcome to AMAFlix</h1>
-<p class="description">AMAFlix is an app to create movie-watching parties with friends./p>
-
-<%= render partial: '/partials/login_form' %>
-<%= link_to "New to AMAFlix? Register Here.", register_path %>
-
+<p class="description">AMAFlix is an app to create movie-watching parties with friends.</p>
 
 
 
 <% if current_user %>
-    <%= link_to "Log out", '/logout', method: :delete %>
+  <%= link_to "Log out", '/logout', method: :delete %>
 <% else %>
-    <%= link_to "Register as a User", "/register" %>
-    <%= link_to "I already have an account", "/login" %>
+  <%= render partial: '/partials/login_form' %><br>
+  <%= link_to "New to AMAFlix? Register Here.", register_path %>
 <% end %>
