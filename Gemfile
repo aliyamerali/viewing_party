@@ -32,7 +32,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov'
-  # dont forget to add meeeeee  gem 'shoulda_matcher'
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
