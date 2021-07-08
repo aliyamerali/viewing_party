@@ -19,8 +19,8 @@ RSpec.describe "Welcome page" do
   end
 
   it 'has a button to login' do
-    expect(page).to have_field("Email")
-    expect(page).to have_field("Password")
+    expect(page).to have_field(:email)
+    expect(page).to have_field(:password)
     expect(page).to have_button("Sign In")
   end
 
