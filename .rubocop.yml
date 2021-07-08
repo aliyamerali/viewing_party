@@ -32,3 +32,6 @@ Metrics/AbcSize:
 
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
+
+Rails/InverseOf:
+  Enabled: false

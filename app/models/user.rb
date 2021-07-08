@@ -7,4 +7,7 @@ class User < ApplicationRecord
 
   has_many :invitations, dependent: :destroy
   has_many :parties, dependent: :destroy
+  #has_many :attending_parties, through:invitations
+
+  has_secure_password
 end

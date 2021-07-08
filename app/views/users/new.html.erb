@@ -3,5 +3,7 @@
   <%= form.text_field :email %>
   <%= form.label :password, 'Password:' %>
   <%= form.password_field :password %>
-  <%= form.submit 'Save' %>
+  <%= form.label :password_confirmation, 'Confirm password:' %>
+  <%= form.password_field :password_confirmation %>
+  <%= form.submit 'Create User' %>
 <% end %>
