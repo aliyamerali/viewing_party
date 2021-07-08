@@ -25,7 +25,6 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop-rails'
-  # gem 'travis'
 end
 
 group :test do
@@ -33,6 +32,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov'
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
