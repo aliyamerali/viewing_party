@@ -5,11 +5,6 @@ RSpec.describe "Welcome page" do
     visit root_path
   end
 
-  # Welcome message
-  # Brief description of the application
-  # Button to Log in
-  # Link to Registration
-
   it 'has a welcome message' do
     expect(page).to have_content("Welcome to AMAFlix")
   end

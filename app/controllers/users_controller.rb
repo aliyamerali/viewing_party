@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
   def login_user
-    # binding.pry
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.email}!"
-      redirect_to root_path
-      # redirect_to "/dashboard"
+      redirect_to "/dashboard"
     else
       flash[:error] = "Invalid Credentials"
       redirect_to root_path
