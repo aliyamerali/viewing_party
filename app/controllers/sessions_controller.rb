@@ -1,4 +1,4 @@
-class SessionsController <ApplicationController
+class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
@@ -6,7 +6,7 @@ class SessionsController <ApplicationController
       flash[:success] = "Welcome, #{user.email}!"
       redirect_to dashboard_path
     else
-      flash[:error] = "Invalid Credentials"
+      flash[:error] = 'Invalid Credentials'
       redirect_to root_path
     end
   end
