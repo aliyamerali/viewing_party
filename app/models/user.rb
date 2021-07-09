@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
-  validates :password, require: true, presence: true
+  validates :password, presence: true
 
   has_many :friended_users, foreign_key: :friender_id, class_name: 'Friend', dependent: :destroy # , inverse_of: :user
   has_many :friendees, through: :friended_users
