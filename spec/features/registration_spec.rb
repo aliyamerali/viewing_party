@@ -10,7 +10,7 @@ RSpec.describe 'registration page' do
     expect(page).to have_button('Create User')
   end
 
-  it 'creates new user on form submission' do
+  it 'creates new user on form submission and logs them in' do
     visit '/register'
 
     fill_in 'user[email]', with: 'amaf@test.com'
@@ -19,8 +19,12 @@ RSpec.describe 'registration page' do
     click_on 'Create User'
 
     expect(current_path).to eq(dashboard_path)
+    expect(page).to have_content("Welcome, amaf@test.com!")
+    expect(page).to have_button("Log Out")
+    expect(page).to_not have_field(:email)
+    expect(page).to_not have_field(:password)
+    expect(page).to_not have_link("New to AMAFlix? Register Here.", :href=>"/register" )
   end
 end
-#add test for logged in user
 
 #add test for sad path for unmatching pw and pwconfirm
