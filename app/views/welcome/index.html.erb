@@ -1,6 +1,11 @@
-<h1>Welcome to Viewing Party</h1>
-<p class="description">Viewing Party is an app to create movie-watching parties with friends./p>
+<h1>Welcome to AMAFlix</h1>
+<p class="description">AMAFlix is an app to create movie-watching parties with friends.</p>
 
-<%= render partial: '/partials/login_form' %>
 
-<%= link_to "New to Viewing Party? Register Here.", register_path %>
+
+<% if current_user %>
+  <%= link_to "Log out", '/logout', method: :delete %>
+<% else %>
+  <%= render partial: '/partials/login_form' %><br>
+  <%= link_to "New to AMAFlix? Register Here.", register_path %>
+<% end %>

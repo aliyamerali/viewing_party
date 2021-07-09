@@ -11,7 +11,7 @@ RSpec.describe "Welcome page" do
   # Link to Registration
 
   it 'has a welcome message' do
-    expect(page).to have_content("Welcome to Viewing Party")
+    expect(page).to have_content("Welcome to AMAFlix")
   end
 
   it 'has an app description' do
@@ -25,6 +25,6 @@ RSpec.describe "Welcome page" do
   end
 
   it 'has a link to register' do
-    expect(page).to have_link("New to Viewing Party? Register Here.", :href=>"/register" )
+    expect(page).to have_link("New to AMAFlix? Register Here.", :href=>"/register" )
   end
 end
