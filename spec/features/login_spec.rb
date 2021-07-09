@@ -8,13 +8,14 @@ RSpec.describe "logging in" do
 
     fill_in :email, with: 'amaf@test.com'
     fill_in :password, with: '1234'
-    click_button 'Sign In'
+    click_button "Sign In"
 
-    expect(current_path).to eq('/login')
+    expect(current_path).to eq('/')
+    # expect(current_path).to eq('/dashboard')
     expect(page).to have_content("Welcome, amaf@test.com!")
     expect(page).to have_button("Log Out")
     expect(page).to_not have_field('user[email]')
     expect(page).to_not have_field('user[password]')
-    expect(page).to_not have_link("New to Viewing Party? Register Here.", :href=>"/register" )
+    expect(page).to_not have_link("New to AMAFlix? Register Here.", :href=>"/register" )
   end
 end
