@@ -66,4 +66,21 @@ RSpec.describe "logging in" do
     expect(page).to have_link("New to AMAFlix? Register Here.", :href=>"/register" )
     expect(page).to_not have_button("Log Out")
   end
+
+  it 'logs a user out when they click logout' do
+    user = User.create(email: 'amaf@test.com', password: '1234', password_confirmation: '1234')
+
+    visit root_path
+
+    fill_in :email, with: 'amaf@test.com'
+    fill_in :password, with: '1234'
+    click_button "Sign In"
+    click_button "Log Out"
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_field(:email)
+    expect(page).to have_field(:password)
+    expect(page).to have_link("New to AMAFlix? Register Here.", :href=>"/register" )
+    expect(page).to_not have_button("Log Out")
+  end
 end

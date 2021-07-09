@@ -11,6 +11,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def logout_user
+    session[:user_id] = nil
+    redirect_to root_path
+  end
+
   def new
     @user = User.new
   end
@@ -20,8 +25,8 @@ class UsersController < ApplicationController
     user[:email] = user[:email].downcase
     new_user = User.create(user)
     if new_user.save
-        session[:user_id] = new_user.id
-        flash[:success] = "Welcome, #{new_user.email}!"
+      session[:user_id] = new_user.id
+      flash[:success] = "Welcome, #{new_user.email}!"
     end
     redirect_to dashboard_path
   end
