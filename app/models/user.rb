@@ -8,9 +8,13 @@ class User < ApplicationRecord
   has_many :friending_users, foreign_key: :friendee_id, class_name: 'Friend', dependent: :destroy # , inverse_of: :user
   has_many :frienders, through: :friending_users, dependent: :destroy
 
-  has_many :invitations, dependent: :destroy
-  has_many :parties, dependent: :destroy
-  # has_many :attending_parties, through:invitations
+  # has_many :invitations, dependent: :destroy
+  has_many :invitations, foreign_key: :guest_id, class_name: 'Invitation', dependent: :destroy
+  # has_many :parties, dependent: :destroy
+  has_many :parties, foreign_key: :host_id, class_name: 'Party'
+
+  # For checkin - do we need this additional relationship? Or can we just go through existing tables?
+  # has_many :attending_parties, through: :invitations
 
   has_secure_password
 end
