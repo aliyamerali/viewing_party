@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_020316) do
+ActiveRecord::Schema.define(version: 2021_07_09_204548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,21 +24,21 @@ ActiveRecord::Schema.define(version: 2021_07_08_020316) do
 
   create_table "invitations", force: :cascade do |t|
     t.bigint "party_id"
-    t.bigint "user_id"
+    t.bigint "guest_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_invitations_on_guest_id"
     t.index ["party_id"], name: "index_invitations_on_party_id"
-    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "parties", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "host_id"
     t.integer "movie_id"
     t.string "movie_title"
     t.string "event_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_parties_on_user_id"
+    t.index ["host_id"], name: "index_parties_on_host_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,6 +49,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_020316) do
   end
 
   add_foreign_key "invitations", "parties"
-  add_foreign_key "invitations", "users"
-  add_foreign_key "parties", "users"
+  add_foreign_key "invitations", "users", column: "guest_id"
+  add_foreign_key "parties", "users", column: "host_id"
 end
