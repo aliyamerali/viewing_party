@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.email}!"
-      redirect_to "/dashboard"
+      redirect_to dashboard_path
     else
       flash[:error] = "Invalid Credentials"
       redirect_to root_path
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         session[:user_id] = new_user.id
         flash[:success] = "Welcome, #{new_user.email}!"
     end
-    redirect_to root_path
+    redirect_to dashboard_path
   end
 
   private

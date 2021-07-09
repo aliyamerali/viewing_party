@@ -18,7 +18,7 @@ RSpec.describe 'registration page' do
     fill_in 'user[password_confirmation]', with: '1234'
     click_on 'Create User'
 
-    expect(current_path).to eq(root_path) #update path to dashboard when dashboard exists
+    expect(current_path).to eq(dashboard_path) #update path to dashboard when dashboard exists
   end
 end
 #add test for logged in user
