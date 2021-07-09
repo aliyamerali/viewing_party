@@ -62,5 +62,3 @@ RSpec.describe 'registration page' do
     expect(page).to have_button('Sign In')
   end
 end
-
-#add test for sad path for unmatching pw and pwconfirm
