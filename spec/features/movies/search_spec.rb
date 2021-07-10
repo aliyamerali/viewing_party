@@ -38,4 +38,13 @@ RSpec.describe 'search movies' do
     expect(page).to have_content("The Story of Mother's Day")
     expect(page).to have_content("Vote Average: 5")
   end
+
+  it 'has a button to show top 40 and a search bar to search movies' do
+    fill_in :search, with: @query
+    click_button('Find Movies')
+
+    expect(page).to have_field(:search)
+    expect(page).to have_button('Find Movies')
+    expect(page).to have_button('Find Top Rated Movies')
+  end
 end
