@@ -17,9 +17,11 @@ gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 
+
 group :development, :test do
   gem 'pry'
   gem 'travis'
+  gem 'figaro'
 end
 
 group :development do
@@ -34,6 +36,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'webmock'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
