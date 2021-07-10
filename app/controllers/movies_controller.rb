@@ -8,8 +8,13 @@ class MoviesController < ApplicationController
   def new_search
 
   end
-  
+
   def search
+    if params[:search]
+      # query api for search term
+    else
+      #return top 40 movies from api - array of hashes/ [{original_title: "", vote_average: }, ...]
+    end
 
   end
 
