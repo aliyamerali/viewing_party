@@ -3,9 +3,7 @@ class MoviesController < ApplicationController
 
   def show; end
 
-  def new_search
-    # TBD
-  end
+  def new_search; end
 
   def search
     if params[:search]
@@ -18,6 +16,7 @@ class MoviesController < ApplicationController
   private
 
   def require_login
-    redirect_to '/register' if current_user.nil?
+    flash[:error] = "Please login to continue"
+    redirect_to root_path if current_user.nil?
   end
 end
