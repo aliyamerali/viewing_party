@@ -6,17 +6,17 @@ class MoviesController < ApplicationController
   def new_search; end
 
   def search
-    if params[:search]
-      # query api for search term
-    else
-      @movies = MovieService.top40
-      # return top 40 movies from api - array of hashes/ [{original_title: "", vote_average: }, ...]
-    end
+    @movies = if params[:search]
+                MovieService.search(params[:search])
+              else
+                MovieService.top40
+              end
   end
 
   private
 
   def require_login
-    redirect_to '/register' if current_user.nil?
+    flash[:error] = 'Please log in to continue'
+    redirect_to root_path if current_user.nil?
   end
 end

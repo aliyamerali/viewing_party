@@ -1,4 +1,10 @@
-<h1>Top 40 Movies:</h1>
+<%= render partial: '/partials/discover_movie_options' %><br>
+
+<% if params[:search] %>
+  <%= "Top 40 Movies" %>
+<% else %>
+  <%= "Top 40 Search Results" %>
+<% end %>
 
 <ul>
   <% @movies.each do |movie| %>
