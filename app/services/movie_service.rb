@@ -27,4 +27,10 @@ class MovieService
     response = Faraday.get "https://api.themoviedb.org/3/movie/#{id}?api_key=#{ENV['MOVIE_API_KEY']}"
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.first_ten_cast(id)
+    response = Faraday.get "https://api.themoviedb.org/3/movie/#{id}/credits?api_key=#{ENV['MOVIE_API_KEY']}"
+    credits = JSON.parse(response.body, symbolize_names: true)
+    cast = credits[:cast].take(10)
+  end
 end
