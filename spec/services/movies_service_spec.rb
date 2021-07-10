@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Movies API Service' do
   describe 'class methods' do
-    it '#top_40 returns top 40 movies' do
+    it '#top_40 returns top 40 movies as an array of hashes' do
       response_body_1 = File.read('spec/fixtures/top_rated_1.json')
       response_body_2 = File.read('spec/fixtures/top_rated_2.json')
       stub_request(:get,"https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV['MOVIE_API_KEY']}&page=1").

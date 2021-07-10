@@ -1,0 +1,7 @@
+<h1>Top 40 Movies:</h1>
+
+<ul>
+  <% @movies.each do |movie| %>
+  <li> <%= movie[:title] %>, Vote Average: <%= movie[:vote_average] %> </li>
+  <% end %>
+</ul>

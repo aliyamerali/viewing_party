@@ -13,6 +13,7 @@ class MoviesController < ApplicationController
     if params[:search]
       # query api for search term
     else
+      @movies = MovieService.top_40
       #return top 40 movies from api - array of hashes/ [{original_title: "", vote_average: }, ...]
     end
 
