@@ -34,5 +34,25 @@ RSpec.describe 'Movies API Service' do
       expect(search_result.first[:title]).to eq("Perfume: The Story of a Murderer")
       expect(search_result.last[:title]).to eq("The Story of Mother's Day")
     end
+
+    it '.details returns movie details for a given movie' do
+      movie_id =671
+      response_body_1 = File.read('spec/fixtures/movie_details.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body_1, headers: {})
+
+      details = MovieService.details(movie_id)
+      expect(details[:id]).to eq(movie_id)
+      expect(details).to have_key(:title)
+      expect(details).to have_key(:vote_average)
+      expect(details).to have_key(:runtime)
+      expect(details).to have_key(:genres)
+      expect(details).to have_key(:overview)
+      expect(details[:genres].first[:name]).to eq("Adventure")
+    end
+
+    it '.credits returns movie cast'
+
+    it '.reviews returns movie reviews'
   end
 end

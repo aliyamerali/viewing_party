@@ -22,4 +22,9 @@ class MovieService
 
     search_result.flatten
   end
+
+  def self.details(id)
+    response = Faraday.get "https://api.themoviedb.org/3/movie/#{id}?api_key=#{ENV['MOVIE_API_KEY']}"
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
