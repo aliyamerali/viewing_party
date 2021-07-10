@@ -39,7 +39,7 @@ RSpec.describe 'top 40 functionality' do
       fill_in :email, with: 'amaf@test.com'
       fill_in :password, with: '1234'
       click_button "Sign In"
-      
+
       visit movies_path
       expect(page).to have_content("The Shawshank Redemption")
       expect(page).to have_content("Vote Average: 8.7")

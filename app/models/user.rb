@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # has_many :invitations, dependent: :destroy
   has_many :invitations, foreign_key: :guest_id, class_name: 'Invitation', dependent: :destroy
   # has_many :parties, dependent: :destroy
-  has_many :parties, foreign_key: :host_id, class_name: 'Party'
+  has_many :parties, foreign_key: :host_id, class_name: 'Party', dependent: :destroy
 
   # For checkin - do we need this additional relationship? Or can we just go through existing tables?
   # has_many :attending_parties, through: :invitations
