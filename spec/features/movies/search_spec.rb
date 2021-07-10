@@ -10,9 +10,7 @@ RSpec.describe 'search movies' do
 
     stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=#{@query}&page=2").
         to_return(status: 200, body: response_body_2, headers: {})
-  end
 
-  it 'has a form for movie search' do
     visit '/register'
 
     fill_in 'user[email]', with: 'amaf@test.com'
@@ -21,28 +19,23 @@ RSpec.describe 'search movies' do
     click_on 'Create User'
 
     visit discover_path
+  end
 
+  it 'has a form for movie search' do
     expect(page).to have_field(:search)
     fill_in :search, with: @query
     click_button('Find Movies')
     expect(current_path).to eq(movies_path)
   end
 
-  xit 'submitting movie search form directs to results on /movies page' do
-    response_body = File.read('spec/fixtures/movie_search.json')
-    stub_request(:get,'https://api.themoviedb.org/3/search/movie').
-        to_return(status: 200, body: response_body, headers: {})
+  it 'submitting movie search form directs to results on /movies page' do
+    fill_in :search, with: @query
+    click_button('Find Movies')
 
-    visit '/discover'
-
-    #???expect(page).to have_field(:search)
-    fill_in :search, with: 'The Story'
-    click_button 'Search'
-
-    expect(page).to have_content('Dark Phoenix')
+    expect(current_path).to eq(movies_path)
+    expect(page).to have_content("Perfume: The Story of a Murderer")
+    expect(page).to have_content("Vote Average: 7.3")
+    expect(page).to have_content("The Story of Mother's Day")
+    expect(page).to have_content("Vote Average: 5")
   end
-  # visits movies page
-  # searchbox to search for movies
-  # fill it in with movie
-  # taken to search result with the movies that matches
 end

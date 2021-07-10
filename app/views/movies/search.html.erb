@@ -1,4 +1,8 @@
-<h1>Top 40 Movies:</h1>
+<% if params[:search] %>
+  <%= "Top 40 Movies" %>
+<% else %>
+  <%= "Top 40 Search Results" %>
+<% end %>
 
 <ul>
   <% @movies.each do |movie| %>

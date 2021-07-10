@@ -8,13 +8,10 @@ class MoviesController < ApplicationController
   end
 
   def search
-    # binding.pry
     if params[:search]
-      # query api for search term
       @movies = MovieService.search(params[:search])
     else
       @movies = MovieService.top40
-      # return top 40 movies from api - array of hashes/ [{original_title: "", vote_average: }, ...]
     end
   end
 
