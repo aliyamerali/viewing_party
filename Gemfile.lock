@@ -280,6 +280,7 @@ DEPENDENCIES
   bootsnap
   capybara
   coffee-rails (~> 4.2)
+  faraday
   figaro
   jbuilder (~> 2.5)
   launchy
