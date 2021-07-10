@@ -66,6 +66,17 @@ RSpec.describe 'Movies API Service' do
       expect(cast.first[:character]).to eq("Harry Potter")
     end
 
-    it '.reviews returns movie reviews'
+    it '.reviews returns movie reviews' do
+      movie_id = 114
+      response_body = File.read('spec/fixtures/movie_reviews.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/reviews?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body, headers: {})
+
+      reviews = MovieService.reviews
+
+      expect(reviews.length).to eq(3)
+      expect(reviews.first).to have_key[:author]
+      expect(reviews.first).to have_key[:content]
+    end
   end
 end
