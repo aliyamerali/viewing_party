@@ -72,11 +72,11 @@ RSpec.describe 'Movies API Service' do
       stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/reviews?api_key=#{ENV['MOVIE_API_KEY']}").
           to_return(status: 200, body: response_body, headers: {})
 
-      reviews = MovieService.reviews
+      reviews = MovieService.reviews(movie_id)
 
       expect(reviews.length).to eq(3)
-      expect(reviews.first).to have_key[:author]
-      expect(reviews.first).to have_key[:content]
+      expect(reviews.first).to have_key(:author)
+      expect(reviews.first).to have_key(:content)
     end
   end
 end

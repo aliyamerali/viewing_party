@@ -33,4 +33,10 @@ class MovieService
     credits = JSON.parse(response.body, symbolize_names: true)
     cast = credits[:cast].take(10)
   end
+
+  def self.reviews(id)
+    response = Faraday.get "https://api.themoviedb.org/3/movie/#{id}/reviews?api_key=#{ENV['MOVIE_API_KEY']}"
+    review_summary = JSON.parse(response.body, symbolize_names: true)
+    reviews = review_summary[:results]
+  end
 end
