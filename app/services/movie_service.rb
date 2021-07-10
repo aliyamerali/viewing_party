@@ -11,7 +11,7 @@ class MovieService
     top40.flatten
   end
 
-  def self.search(query_string)
+  def self.search(query)
     response1 = Faraday.get "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['MOVIE_API_KEY']}&query=#{query}&page=1"
     page1 = JSON.parse(response1.body, symbolize_names: true)
     search_result = page1[:results]
