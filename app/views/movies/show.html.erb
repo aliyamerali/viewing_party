@@ -1,0 +1,25 @@
+<h1> <%= @details[:title] %> </h1>
+
+Vote Average: <%= @details[:vote_average] %>
+Runtime: <%= (@details[:runtime]/60).round %> hours <%= @details[:runtime] % 60 %> minutes
+Genres:
+<% @details[:genres].each do |genre| %>
+<%= genre[:name] %>
+<% end %>
+
+Summary:
+<%= @details[:overview] %>
+
+Cast:
+<ul>
+  <% @cast.each do |cast| %>
+    <li><%= cast[:name] %> as <%= cast[:character] %></li>
+  <% end %>
+</ul>
+
+Total Reviews: <%= @reviews.length %>
+Reviews:
+<% @reviews.each do |review| %>
+  <%= review[:author] %>
+  <%= review[:content] %>
+<% end %>

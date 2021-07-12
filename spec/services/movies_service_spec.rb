@@ -34,5 +34,49 @@ RSpec.describe 'Movies API Service' do
       expect(search_result.first[:title]).to eq("Perfume: The Story of a Murderer")
       expect(search_result.last[:title]).to eq("The Story of Mother's Day")
     end
+
+    it '.details returns movie details for a given movie' do
+      movie_id = 671
+      response_body = File.read('spec/fixtures/movie_details.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body, headers: {})
+
+      details = MovieService.details(movie_id)
+      expect(details[:id]).to eq(movie_id)
+      expect(details).to have_key(:title)
+      expect(details).to have_key(:vote_average)
+      expect(details).to have_key(:runtime)
+      expect(details).to have_key(:genres)
+      expect(details).to have_key(:overview)
+      expect(details[:genres].first[:name]).to eq("Adventure")
+    end
+
+    it '.first_ten_cast returns movie cast' do
+      movie_id = 671
+      response_body = File.read('spec/fixtures/movie_credits.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body, headers: {})
+
+      cast = MovieService.first_ten_cast(movie_id)
+
+      expect(cast.length).to eq(10)
+      expect(cast.first).to have_key(:name)
+      expect(cast.first).to have_key(:character)
+      expect(cast.first[:name]).to eq("Daniel Radcliffe")
+      expect(cast.first[:character]).to eq("Harry Potter")
+    end
+
+    it '.reviews returns movie reviews' do
+      movie_id = 114
+      response_body = File.read('spec/fixtures/movie_reviews.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/reviews?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body, headers: {})
+
+      reviews = MovieService.reviews(movie_id)
+
+      expect(reviews.length).to eq(3)
+      expect(reviews.first).to have_key(:author)
+      expect(reviews.first).to have_key(:content)
+    end
   end
 end
