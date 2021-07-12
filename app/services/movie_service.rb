@@ -31,7 +31,11 @@ class MovieService
   def self.first_ten_cast(id)
     response = Faraday.get "https://api.themoviedb.org/3/movie/#{id}/credits?api_key=#{ENV['MOVIE_API_KEY']}"
     credits = JSON.parse(response.body, symbolize_names: true)
-    credits[:cast].take(10)
+    if credits[:cast].count > 10
+      credits[:cast].take(10)
+    else
+      credits[:cast]
+    end
   end
 
   def self.reviews(id)
