@@ -47,4 +47,12 @@ RSpec.describe 'search movies' do
     expect(page).to have_button('Find Movies')
     expect(page).to have_button('Find Top Rated Movies')
   end
+
+  it 'each title on movies page links to the movies detail page' do
+    fill_in :search, with: @query
+    click_button('Find Movies')
+    
+    expect(page).to have_link("Perfume: The Story of a Murderer", :href=>'/movies/1427')
+    expect(page).to have_link("The Story of Mother's Day", :href=>'/movies/828714')
+  end
 end

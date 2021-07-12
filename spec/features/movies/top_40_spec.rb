@@ -43,4 +43,10 @@ RSpec.describe 'top 40 functionality' do
       expect(page).to have_button('Find Top Rated Movies')
     end
   end
+
+  it 'each title on movies page links to the movies detail page' do
+    visit movies_path
+    expect(page).to have_link("The Shawshank Redemption", :href=>'/movies/278')
+    expect(page).to have_link("Zack Snyder's Justice League", :href=>'/movies/791373')
+  end
 end
