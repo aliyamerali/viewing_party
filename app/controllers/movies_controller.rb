@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
     @movies = if params[:search]
                 MovieService.search(params[:search])
               else
-                MovieService.top40
+                MovieFacade.top40
               end
   end
 

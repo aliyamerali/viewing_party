@@ -8,6 +8,6 @@
 
 <ul>
   <% @movies.each do |movie| %>
-  <li> <%= link_to movie[:title], "/movies/#{movie[:id]}" %>, Vote Average: <%= movie[:vote_average] %> </li>
+  <li> <%= link_to movie.title, "/movies/#{movie.id}" %>, Vote Average: <%= movie.vote_average %> </li>
   <% end %>
 </ul>
