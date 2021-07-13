@@ -30,4 +30,17 @@ class MovieFacade
     Movie.new(MovieService.details(id))
   end
 
+  def self.first_ten_cast(id)
+    credits = MovieService.credits(id)
+    cast = credits[:cast].map do |cast_member_info|
+      CastMember.new(cast_member_info)
+    end
+
+    if cast.count > 10
+      cast.take(10)
+    else
+      cast
+    end
+  end
+
 end

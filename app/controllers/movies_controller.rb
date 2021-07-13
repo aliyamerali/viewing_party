@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = MovieFacade.details(params[:id])
-    @cast = MovieService.first_ten_cast(params[:id])
+    @cast = MovieFacade.first_ten_cast(params[:id])
     @reviews = MovieService.reviews(params[:id])
   end
 
