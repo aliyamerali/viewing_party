@@ -11,16 +11,15 @@ class Movie
   end
 
   def format_genres(genres_array)
-    test = genres_array.map do |genre|
+    genres_array.map do |genre|
       genre[:name]
     end
   end
 
   def minutes_to_hr_min(minutes)
     runtime = {}
-    runtime[:hours] = (minutes/60).round
+    runtime[:hours] = (minutes / 60).round
     runtime[:minutes] = minutes % 60
     runtime
   end
-
 end

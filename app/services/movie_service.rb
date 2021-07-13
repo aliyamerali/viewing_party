@@ -27,5 +27,4 @@ class MovieService
   def private_class_method.parse(response)
     JSON.parse(response.body, symbolize_names: true)
   end
-
 end

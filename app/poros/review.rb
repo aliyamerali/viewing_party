@@ -5,5 +5,4 @@ class Review
     @author = review_data[:author]
     @content = review_data[:content]
   end
-
 end
