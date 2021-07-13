@@ -2,6 +2,7 @@
   <h1>Welcome <%= @user.email %>!</h1>
   <%= button_to "Discover Movies", discover_path, method: :get %>
 
+  <br>
   <h3>Viewing Parties:</h3>
   <table>
     <th>Movie</th>
@@ -26,6 +27,7 @@
     <% end %>
   </table>
 
+  <br><br>
   <%= button_to "Log Out", '/logout', method: :delete %>
 
 

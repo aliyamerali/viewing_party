@@ -11,10 +11,10 @@
   <%= f.number_field :duration, :value => @movie.runtime[:total_in_minutes], min: @movie.runtime[:total_in_minutes]  %>
   <br>
   <%= f.label :date, 'Date:' %>
-  <%= f.date_field :date %>
+  <%= f.date_field :date, :required => true  %>
   <br>
   <%= f.label :event_time, 'Start Time:' %>
-  <%= f.time_field :event_time %>
+  <%= f.time_field :event_time, :required => true %>
   <br>
   <%= f.submit %>
 <% end %>
