@@ -20,6 +20,6 @@ Cast:
 Total Reviews: <%= @reviews.length %>
 Reviews:
 <% @reviews.each do |review| %>
-  <%= review[:author] %>
-  <%= review[:content] %>
+  <%= review.author %>
+  <%= review.content %>
 <% end %>

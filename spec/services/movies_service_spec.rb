@@ -66,9 +66,9 @@ RSpec.describe 'Movies API Service' do
 
       reviews = MovieService.reviews(movie_id)
 
-      expect(reviews.length).to eq(3)
-      expect(reviews.first).to have_key(:author)
-      expect(reviews.first).to have_key(:content)
+      expect(reviews[:results].length).to eq(3)
+      expect(reviews[:results].first).to have_key(:author)
+      expect(reviews[:results].first).to have_key(:content)
     end
   end
 end
