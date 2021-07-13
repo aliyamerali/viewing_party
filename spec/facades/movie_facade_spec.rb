@@ -51,17 +51,32 @@ RSpec.describe 'Movie Facade' do
       expect(movie.overview).to eq("Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame.")
     end
 
-    it '.first_ten_cast returns movie cast' do
-      movie_id = 671
-      response_body = File.read('spec/fixtures/movie_credits.json')
-      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{ENV['MOVIE_API_KEY']}").
-          to_return(status: 200, body: response_body, headers: {})
+    describe '.first_ten_cast' do
+      it 'returns 10 cast_member objects if 10 are available' do
+        movie_id = 671
+        response_body = File.read('spec/fixtures/movie_credits.json')
+        stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{ENV['MOVIE_API_KEY']}").
+            to_return(status: 200, body: response_body, headers: {})
 
-      cast = MovieFacade.first_ten_cast(movie_id)
+        cast = MovieFacade.first_ten_cast(movie_id)
 
-      expect(cast.length).to eq(10)
-      expect(cast.first.actor).to eq("Daniel Radcliffe")
-      expect(cast.first.character).to eq("Harry Potter")
+        expect(cast.length).to eq(10)
+        expect(cast.first.actor).to eq("Daniel Radcliffe")
+        expect(cast.first.character).to eq("Harry Potter")
+      end
+
+      it 'returns all cast_member objects if there are less than 10' do
+        movie_id = 671
+        response_body = File.read('spec/fixtures/movie_credits_short.json')
+        stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{ENV['MOVIE_API_KEY']}").
+            to_return(status: 200, body: response_body, headers: {})
+
+        cast = MovieFacade.first_ten_cast(movie_id)
+
+        expect(cast.length).to eq(2)
+        expect(cast.first.actor).to eq("Daniel Radcliffe")
+        expect(cast.first.character).to eq("Harry Potter")
+      end
     end
 
     it '.reviews returns movie reviews' do
