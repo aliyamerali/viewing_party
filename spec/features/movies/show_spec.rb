@@ -64,4 +64,10 @@ RSpec.describe 'Movie Show page' do
     expect(page).to have_content("Ryan")
     expect(page).to have_content("You and I are such similar creatures, Vivian.")
   end
+
+  it 'has a button to create a new party' do
+    expect(page).to have_button("Create a Viewing Party")
+    click_button("Create a Viewing Party")
+    expect(page).to have_current_path(parties_new_path)
+  end
 end
