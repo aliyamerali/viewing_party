@@ -5,4 +5,11 @@ class Party < ApplicationRecord
   def host?(user_id)
     host_id == user_id
   end
+
+  def invited_friends
+    invitations = Invitation.where('party_id = ?', self.id)
+    invitations.map do |invite|
+      User.find(invite.guest_id)
+    end
+  end
 end
