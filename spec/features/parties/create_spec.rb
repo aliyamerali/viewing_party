@@ -33,7 +33,7 @@ RSpec.describe 'Creation of a new viewing party' do
       expect(page).to have_content("Viewing Party For: Harry Potter and the Philosopher's Stone")
     end
 
-    describe 'fields to create a new party' do
+    describe 'has fields to create a new party' do
       it 'has a duration field with a default and minimum value of movie runtime' do
         expect(page).to have_field('party[duration]', :with => 152)
       end
@@ -48,10 +48,19 @@ RSpec.describe 'Creation of a new viewing party' do
         click_button("Create Party")
         expect(page).to have_current_path("/parties/new?movie_id=671")
       end
-
-      #checkboxes to add friends
-      #create button
-      #redirect to dashboard
     end
+
+    describe 'submitting the form creates a new party' do
+      it 'redirects to the dashboard on submission' do
+        fill_in 'party[duration]', with: 170
+        fill_in 'party[date]', with: '7/25/2021'
+        fill_in 'party[event_time]', with: '3:30 PM'
+        click_button("Create Party")
+        expect(page).to have_current_path("/dashboard")
+      end
+
+      it 'shows new party on dashboard'
+    end
+    #checkboxes to add friends
   end
 end

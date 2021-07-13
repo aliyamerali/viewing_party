@@ -2,6 +2,7 @@
 
 <%= form_with model: @party, local: true do |f| %>
   <%= f.hidden_field :movie_id, :value => @movie.id %>
+  <%= f.hidden_field :host_id, :value => @user.id %>
 
   <%= f.label :movie_title, 'Movie Title:' %>
   <%= f.text_field :movie_title, :value => @movie.title, :readonly => true  %>
