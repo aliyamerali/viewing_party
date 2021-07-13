@@ -8,11 +8,20 @@
     <th>Date</th>
     <th>Time</th>
     <th>Role</th>
+    <th>Guests</th>
     <% @parties.each do |party| %>
       <tr id=<%=party.movie_id%>>
         <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
         <td> <%= party.date %> </td>
         <td> <%= party.event_time %> </td>
+        <td>
+          <% if party.host?(@user.id) %>
+            <%= "Hosting"  %>
+          <% else %>
+            <%= "Invited" %>
+          <% end %>
+        </td>
+        <td>  </td>
       </tr>
     <% end %>
   </table>
