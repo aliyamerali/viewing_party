@@ -7,7 +7,7 @@ class Party < ApplicationRecord
   end
 
   def invited_friends
-    invitations = Invitation.where('party_id = ?', self.id)
+    invitations = Invitation.where('party_id = ?', id)
     invitations.map do |invite|
       User.find(invite.guest_id)
     end
