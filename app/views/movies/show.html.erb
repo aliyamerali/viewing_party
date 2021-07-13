@@ -25,4 +25,4 @@
   <%= review.content %>
 <% end %>
 <br><br>
-<%= button_to "Create a Viewing Party", parties_new_path, method: :get %>
+<%= button_to "Create a Viewing Party", "/parties/new?movie_id=#{@movie.id}", params: {movie_id: @movie.id}, method: :get %>

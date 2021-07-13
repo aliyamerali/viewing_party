@@ -1,0 +1,19 @@
+<h1> <%= "Viewing Party For: #{@movie.title}" %> </h1>
+
+<%= form_with model: @party, local: true do |f| %>
+  <%= f.hidden_field :movie_id, :value => @movie.id %>
+
+  <%= f.label :movie_title, 'Movie Title:' %>
+  <%= f.text_field :movie_title, :value => @movie.title, :readonly => true  %>
+  <br>
+  <%= f.label :duration, 'Party Duration (minutes):' %>
+  <%= f.number_field :duration, :value => @movie.runtime[:minutes], min: @movie.runtime[:minutes]  %>
+  <br>
+  <%= f.label :date, 'Date:' %>
+  <%= f.date_field :date %>
+  <br>
+  <%= f.label :event_time, 'Start Time:' %>
+  <%= f.time_field :event_time %>
+  <br>
+  <%= f.submit %>
+<% end %>
