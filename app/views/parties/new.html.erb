@@ -8,7 +8,7 @@
   <%= f.text_field :movie_title, :value => @movie.title, :readonly => true  %>
   <br>
   <%= f.label :duration, 'Party Duration (minutes):' %>
-  <%= f.number_field :duration, :value => @movie.runtime[:minutes], min: @movie.runtime[:minutes]  %>
+  <%= f.number_field :duration, :value => @movie.runtime[:total_in_minutes], min: @movie.runtime[:total_in_minutes]  %>
   <br>
   <%= f.label :date, 'Date:' %>
   <%= f.date_field :date %>

@@ -51,15 +51,22 @@ RSpec.describe 'Creation of a new viewing party' do
     end
 
     describe 'submitting the form creates a new party' do
-      it 'redirects to the dashboard on submission' do
+      it 'redirects to the dashboard on submission and shows new party' do
         fill_in 'party[duration]', with: 170
         fill_in 'party[date]', with: '7/25/2021'
         fill_in 'party[event_time]', with: '3:30 PM'
         click_button("Create Party")
+
         expect(page).to have_current_path("/dashboard")
+        within("#671") do
+          expect(page).to have_link("Harry Potter and the Philosopher's Stone", :href => '/movies/671')
+          expect(page).to have_content('7/25/2021')
+          expect(page).to have_content('3:30 PM')
+          expect(page).to have_content('Hosting')
+          expect(page).to have_content('Invited Friends: ')
+        end
       end
 
-      it 'shows new party on dashboard'
     end
     #checkboxes to add friends
   end

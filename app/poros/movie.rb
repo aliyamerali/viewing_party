@@ -18,6 +18,7 @@ class Movie
 
   def minutes_to_hr_min(minutes)
     runtime = {}
+    runtime[:total_in_minutes] = minutes
     runtime[:hours] = (minutes / 60).round
     runtime[:minutes] = minutes % 60
     runtime

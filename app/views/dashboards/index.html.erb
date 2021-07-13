@@ -1,8 +1,29 @@
-
 <% if @user %>
   <h1>Welcome <%= @user.email %>!</h1>
   <%= button_to "Discover Movies", discover_path, method: :get %>
+
+  <h3>Viewing Parties:</h3>
+  <table>
+    <th>Movie</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Role</th>
+    <% @parties.each do |party| %>
+      <tr id=<%=party.movie_id%>>
+        <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
+        <td> <%= party.date %> </td>
+        <td> <%= party.event_time %> </td>
+      </tr>
+    <% end %>
+  </table>
+
   <%= button_to "Log Out", '/logout', method: :delete %>
+
+
+
+
+
+
 <% else %>
   <%= render partial: '/partials/login_form' %><br>
   <%= link_to "New to AMAFlix? Register Here.", register_path %>
