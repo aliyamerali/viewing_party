@@ -2,9 +2,14 @@
 <% if @user %>
   <h1>Welcome <%= @user.email %>!</h1>
   <h2>Your friends:</h2>
+
+  <% if @friends == [] %>
+    You currently have no friends (but AMAFlix still loves you).
+  <% else  %>
     <% @friends.each do |friend| %>
       <%= friend.email %>
     <% end %>
+  <% end %>
     <br><br>
   <%= form_with url: '/add_friend', method: :post, local: true do |f|  %>
     <%= f.label :email, 'Add friend by email:' %>

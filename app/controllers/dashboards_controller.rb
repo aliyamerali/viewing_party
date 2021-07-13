@@ -3,10 +3,8 @@ class DashboardsController < ApplicationController
     @user = current_user
     if !@user.nil?
       @friends = @user.friends_list
-    else
-      @friends = nil
     end
-end
+  end
 
   def add_friend
     @user = current_user

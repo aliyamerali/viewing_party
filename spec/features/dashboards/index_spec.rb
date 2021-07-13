@@ -69,19 +69,18 @@ RSpec.describe "Dashboard page" do
       fill_in 'user[password]', with: '1234'
       fill_in 'user[password_confirmation]', with: '1234'
       click_on 'Create User'
-
     end
 
     it 'shows registered users that are friends' do
       expect(page).to have_content('Welcome amaf@test.com')
       expect(page).to have_content('Your friends:')
-      expect(page).to have_content('You have friends (but AMAFlix still loves you')
+      expect(page).to have_content('You currently have no friends (but AMAFlix still loves you).')
       expect(page).to have_field(:email)
       fill_in :email, with: @email1
       expect(page).to have_button('Add Friend') #ADD HREF LINK HERE
       click_button 'Add Friend'
-      save_and_open_page
       expect(page).to have_content(@email1)
+      expect(page).to_not have_content('You currently have no friends (but AMAFlix still loves you).')
     end
   end
 end
