@@ -34,8 +34,8 @@ RSpec.describe 'Movie PORO' do
     expect(movie.title).to be_a String
     expect(movie.vote_average).to eq(attributes[:vote_average])
     expect(movie.vote_average).to be_a Float
-    expect(movie.runtime).to eq(attributes[:runtime])
-    expect(movie.runtime).to be_a Integer
+    expect(movie.runtime).to eq({hours: 2, minutes: 3})
+    expect(movie.runtime).to be_a Hash
     expect(movie.genres).to eq(["Adventure", "Thrill"])
     expect(movie.genres).to be_a Array
     expect(movie.overview).to eq(attributes[:overview])
