@@ -26,9 +26,11 @@ RSpec.describe 'Creation of a new viewing party' do
     @user = User.find_by(email: email)
     @friend1 = User.create!(email: 'test1@test.com', password: '1234', password_confirmation: '1234')
     @friend2 = User.create!(email: 'test2@test.com', password: '2234', password_confirmation: '2234')
+    @friend3 = User.create!(email: 'test3@test.com', password: '3234', password_confirmation: '3234')
 
     Friend.create!(friender_id: @user.id, friendee_id: @friend1.id)
     Friend.create!(friender_id: @user.id, friendee_id: @friend2.id)
+    Friend.create!(friender_id: @user.id, friendee_id: @friend3.id)
 
     visit '/movies/671'
     click_button "Create a Viewing Party"
@@ -51,8 +53,9 @@ RSpec.describe 'Creation of a new viewing party' do
       end
 
       it 'has checkboxes for all a user\'s friends' do
-        expect(page).to have_css("##{@friend1.id}")
-        expect(page).to have_css("##{@friend2.id}")
+        expect(page).to have_css("[value='#{@friend1.id}']")
+        expect(page).to have_css("[value='#{@friend2.id}']")
+        expect(page).to have_css("[value='#{@friend3.id}']")
       end
 
       xit 'doesn\'t allow submission with duration less than movie runtime' do
@@ -62,11 +65,13 @@ RSpec.describe 'Creation of a new viewing party' do
       end
     end
 
-    describe 'submitting the form creates a new party' do
+    describe 'submitting the form creates a new party and invites selected friends' do
       it 'redirects to the dashboard on submission and shows new party' do
         fill_in 'party[duration]', with: 170
         fill_in 'party[date]', with: '7/25/2021'
         fill_in 'party[event_time]', with: '3:30 PM'
+        find(:css, "[value='#{@friend1.id}']").set(true)
+        find(:css, "[value='#{@friend3.id}']").set(true)
         click_button("Create Party")
 
         expect(page).to have_current_path("/dashboard")
@@ -75,7 +80,9 @@ RSpec.describe 'Creation of a new viewing party' do
           expect(page).to have_content('7/25/2021')
           expect(page).to have_content('3:30 PM')
           expect(page).to have_content('Hosting')
-          # expect(page).to have_content() INVITED FRIENDS
+          expect(page).to have_content(@friend1.email)
+          expect(page).to have_content(@friend3.email)
+          expect(page).to_not have_content(@friend2.email)
         end
       end
 

@@ -8,6 +8,9 @@ class PartiesController < ApplicationController
   def create
     party = Party.new(party_params)
     if party.save
+      params[:party][:friend].each do |friend_id|
+        Invitation.create!(party_id: party.id, guest_id: friend_id)
+      end
       redirect_to dashboard_path
     else
       redirect_to "/parties/new?movie_id=#{params[:party][:movie_id]}"
