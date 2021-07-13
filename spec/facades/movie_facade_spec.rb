@@ -35,5 +35,20 @@ RSpec.describe 'Movie Facade' do
       expect(search_result.first.title).to eq("Perfume: The Story of a Murderer")
       expect(search_result.last.title).to eq("The Story of Mother's Day")
     end
+
+    it '.details returns a single movie object with all attributes populated' do
+      movie_id = 671
+      response_body = File.read('spec/fixtures/movie_details.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body, headers: {})
+
+      movie = MovieFacade.details(movie_id)
+      expect(movie.id).to eq(movie_id)
+      expect(movie.title).to eq("Harry Potter and the Philosopher's Stone")
+      expect(movie.vote_average).to eq(7.9)
+      expect(movie.runtime).to eq(152)
+      expect(movie.genres).to eq(["Adventure", "Fantasy"])
+      expect(movie.overview).to eq("Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame.")
+    end
   end
 end

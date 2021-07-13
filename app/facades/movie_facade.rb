@@ -26,4 +26,8 @@ class MovieFacade
     movies
   end
 
+  def self.details(id)
+    Movie.new(MovieService.details(id))
+  end
+
 end

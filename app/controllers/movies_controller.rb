@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   before_action :require_login
 
   def show
-    @details = MovieService.details(params[:id])
+    @movie = MovieFacade.details(params[:id])
     @cast = MovieService.first_ten_cast(params[:id])
     @reviews = MovieService.reviews(params[:id])
   end
