@@ -44,4 +44,44 @@ RSpec.describe "Dashboard page" do
       expect(page).to have_link("New to AMAFlix? Register Here.", :href=>"/register" )
     end
   end
+
+  describe 'Shows friends' do
+    before :each do
+
+      visit '/register'
+      @email1 = 'test1@test.com'
+      fill_in 'user[email]', with: @email1
+      fill_in 'user[password]', with: '1234'
+      fill_in 'user[password_confirmation]', with: '1234'
+      click_on 'Create User'
+
+      visit '/register'
+      email2 = 'test2@test.com'
+      fill_in 'user[email]', with: email2
+      fill_in 'user[password]', with: '1234'
+      fill_in 'user[password_confirmation]', with: '1234'
+      click_on 'Create User'
+
+      visit '/register'
+
+      main_email = 'amaf@test.com'
+      fill_in 'user[email]', with: main_email
+      fill_in 'user[password]', with: '1234'
+      fill_in 'user[password_confirmation]', with: '1234'
+      click_on 'Create User'
+
+    end
+
+    it 'shows registered users that are friends' do
+      expect(page).to have_content('Welcome amaf@test.com')
+      expect(page).to have_content('Your friends:')
+      expect(page).to have_content('You have friends (but AMAFlix still loves you')
+      expect(page).to have_field(:email)
+      fill_in :email, with: @email1
+      expect(page).to have_button('Add Friend') #ADD HREF LINK HERE
+      click_button 'Add Friend'
+      save_and_open_page
+      expect(page).to have_content(@email1)
+    end
+  end
 end

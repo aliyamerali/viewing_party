@@ -1,8 +1,23 @@
 
 <% if @user %>
   <h1>Welcome <%= @user.email %>!</h1>
+  <h2>Your friends:</h2>
+    <% @friends.each do |friend| %>
+      <%= friend.email %>
+    <% end %>
+    <br><br>
+  <%= form_with url: '/add_friend', method: :post, local: true do |f|  %>
+    <%= f.label :email, 'Add friend by email:' %>
+    <%= f.text_field :email %>
+    <%= f.submit "Add Friend" %>
+  <% end %>
   <%= button_to "Discover Movies", discover_path, method: :get %>
   <%= button_to "Log Out", '/logout', method: :delete %>
+
+
+
+
+
 <% else %>
   <%= render partial: '/partials/login_form' %><br>
   <%= link_to "New to AMAFlix? Register Here.", register_path %>

@@ -17,4 +17,8 @@ class User < ApplicationRecord
   # has_many :attending_parties, through: :invitations
 
   has_secure_password
+
+  def friends_list
+    friendees.select(:id, :email)
+  end
 end
