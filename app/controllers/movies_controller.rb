@@ -2,18 +2,18 @@ class MoviesController < ApplicationController
   before_action :require_login
 
   def show
-    @details = MovieService.details(params[:id])
-    @cast = MovieService.first_ten_cast(params[:id])
-    @reviews = MovieService.reviews(params[:id])
+    @movie = MovieFacade.details(params[:id])
+    @cast = MovieFacade.first_ten_cast(params[:id])
+    @reviews = MovieFacade.reviews(params[:id])
   end
 
   def new_search; end
 
   def search
     @movies = if params[:search]
-                MovieService.search(params[:search])
+                MovieFacade.search(params[:search])
               else
-                MovieService.top40
+                MovieFacade.top40
               end
   end
 
