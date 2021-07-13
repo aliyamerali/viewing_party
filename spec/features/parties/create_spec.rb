@@ -23,6 +23,13 @@ RSpec.describe 'Creation of a new viewing party' do
     fill_in 'user[password_confirmation]', with: '1234'
     click_on 'Create User'
 
+    @user = User.find_by(email: email)
+    @friend1 = User.create!(email: 'test1@test.com', password: '1234', password_confirmation: '1234')
+    @friend2 = User.create!(email: 'test2@test.com', password: '2234', password_confirmation: '2234')
+
+    Friend.create!(friender_id: @user.id, friendee_id: @friend1.id)
+    Friend.create!(friender_id: @user.id, friendee_id: @friend2.id)
+
     visit '/movies/671'
     click_button "Create a Viewing Party"
   end
@@ -41,6 +48,11 @@ RSpec.describe 'Creation of a new viewing party' do
       it 'has additional required fields' do
         expect(page).to have_field 'party[date]'
         expect(page).to have_field 'party[event_time]'
+      end
+
+      it 'has checkboxes for all a user\'s friends' do
+        expect(page).to have_css("##{@friend1.id}")
+        expect(page).to have_css("##{@friend2.id}")
       end
 
       xit 'doesn\'t allow submission with duration less than movie runtime' do

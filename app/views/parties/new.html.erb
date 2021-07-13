@@ -16,5 +16,12 @@
   <%= f.label :event_time, 'Start Time:' %>
   <%= f.time_field :event_time, :required => true %>
   <br>
+  <%= f.label :friends, 'Invite Friends' %>
+  <br>
+  <% @user.friendees.each do |friend| %>
+    <%= f.check_box :friend, id: friend.id %>
+    <%= f.label :friend, friend.email %>
+    <br>
+  <% end %>
   <%= f.submit %>
 <% end %>
