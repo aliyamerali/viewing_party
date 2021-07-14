@@ -50,6 +50,9 @@ class MovieFacade
   end
 
   def self.similar(id)
-    Movie.new(MovieService.similar(id))
+    similar_movies = MovieService.similar(id)
+    similar_movies[:results].map do |movie_info|
+      SimilarMovie.new(movie_info)
+    end
   end
 end
