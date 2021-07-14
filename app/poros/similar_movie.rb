@@ -1,5 +1,6 @@
 class SimilarMovie
   attr_reader :id, :title, :overview, :vote_average
+
   def initialize(similar_movie_info)
     @id = similar_movie_info[:id]
     @title = similar_movie_info[:title]
