@@ -10,22 +10,36 @@
     <th>Time</th>
     <th>Role</th>
     <th>Guests</th>
-    <% @parties.each do |party| %>
+    <% @hosting_parties.each do |party| %>
       <tr id=<%=party.movie_id%>>
         <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
         <td> <%= party.date %> </td>
         <td> <%= party.event_time %> </td>
-        <td>
-          <% if party.host?(@user.id) %>
-            <%= "Hosting"  %>
-          <% else %>
-            <%= "Invited" %>
-          <% end %>
-        </td>
+        <td>Hosting</td>
         <td>
           <ul>
             <% party.invited_friends.each do |friend| %>
             <li> <%= friend.email %> </li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+
+    <% @attending_parties.each do |party| %>
+      <tr id=<%=party.movie_id%>>
+        <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
+        <td> <%= party.date %> </td>
+        <td> <%= party.event_time %> </td>
+        <td>Invited</td>
+        <td>
+          <ul>
+            <% party.invited_friends.each do |friend| %>
+              <% if friend.id == @user.id %>
+                <li><strong> <%= friend.email %> </strong></li>
+              <% else %>
+                <li> <%= friend.email %> </li>
+              <% end %>
             <% end %>
           </ul>
         </td>

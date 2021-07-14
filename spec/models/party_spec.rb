@@ -5,6 +5,7 @@ RSpec.describe Party do
     it {should belong_to(:user)}
     it {should have_many(:invitations)}
   end
+
   before :each do
     movie = Movie.new({id: 123,
                        title: "Movie",
@@ -26,7 +27,7 @@ RSpec.describe Party do
 
     Invitation.create!(party_id: @party.id, guest_id: @user2.id)
     Invitation.create!(party_id: @party.id, guest_id: @user3.id)
-end
+  end
 
   describe 'instance methods' do
     it '#host? returns true if the user entered is host, else false' do
