@@ -1,4 +1,12 @@
 class Party < ApplicationRecord
+  validates :date, presence: true
+  validates :event_time, presence: true
+  validates :movie_id, presence: true
+  validates :movie_title, presence: true
+  validates :host_id, presence: true
+  validates :duration, presence: true
+
+
   belongs_to :user, foreign_key: :host_id, class_name: 'User'
   has_many :invitations, dependent: :destroy
 
