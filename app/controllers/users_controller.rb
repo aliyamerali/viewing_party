@@ -9,12 +9,12 @@ class UsersController < ApplicationController
     new_user = User.create(user)
     if new_user.save
       session[:user_id] = new_user.id
-      flash[:success] = "Welcome, #{new_user.email}!"
       redirect_to dashboard_path
     else
       redirect_to root_path
     end
   end
+
 
   private
 

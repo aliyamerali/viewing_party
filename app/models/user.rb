@@ -18,6 +18,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def friends_list
+    friendees.select(:id, :email)
+  end
+
   def attending_parties
     Party.joins(:invitations).select('parties.*').where('invitations.guest_id = ?', id)
   end
