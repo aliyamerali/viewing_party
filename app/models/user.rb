@@ -17,4 +17,8 @@ class User < ApplicationRecord
   # has_many :attending_parties, through: :invitations
 
   has_secure_password
+
+  def attending_parties
+    Party.joins(:invitations).select('parties.*').where('invitations.guest_id = ?', id)
+  end
 end

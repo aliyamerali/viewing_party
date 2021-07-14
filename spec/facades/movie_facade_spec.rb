@@ -46,7 +46,7 @@ RSpec.describe 'Movie Facade' do
       expect(movie.id).to eq(movie_id)
       expect(movie.title).to eq("Harry Potter and the Philosopher's Stone")
       expect(movie.vote_average).to eq(7.9)
-      expect(movie.runtime).to eq({:hours=>2, :minutes=>32})
+      expect(movie.runtime).to eq({:hours=>2, :minutes=>32, :total_in_minutes=>152})
       expect(movie.genres).to eq(["Adventure", "Fantasy"])
       expect(movie.overview).to eq("Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame.")
     end
