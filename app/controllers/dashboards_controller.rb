@@ -9,7 +9,11 @@ class DashboardsController < ApplicationController
   def add_friend
     @user = current_user
     @friend = User.find_by(email: params[:email])
-    Friend.create!(friender_id: @user.id, friendee_id: @friend.id)
+    if @friend
+      Friend.create!(friender_id: @user.id, friendee_id: @friend.id)
+    else
+      flash[:error] = 'Unable to add friend: User does not exist'
+    end
     redirect_to dashboard_path
   end
 end

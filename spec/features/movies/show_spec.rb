@@ -80,4 +80,12 @@ RSpec.describe 'Movie Show page' do
     click_button("Create a Viewing Party")
     expect(page).to have_current_path("/parties/new?movie_id=671")
   end
+
+  it 'unauthenticated users do not see search capability' do
+    visit root_path
+    click_button("Log Out")
+
+    visit "/movies/#{@movie_id}"
+    expect(page).to have_current_path(root_path)
+  end
 end
