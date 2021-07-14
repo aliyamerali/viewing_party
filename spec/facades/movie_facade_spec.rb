@@ -94,5 +94,17 @@ RSpec.describe 'Movie Facade' do
       expect(reviews.first.content.include?(excerpt)).to eq(true)
     end
 
+    it '.simliar returns similar movies to movie' do
+      movie_id = 671
+      response_body = File.read('spec/fixtures/similar_movies.json')
+      stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/similar?api_key=#{ENV['MOVIE_API_KEY']}").
+          to_return(status: 200, body: response_body, headers: {})
+
+      movies = MovieFacade.similar(movie_id)
+      expect(movies.first.title).to eq("The Golden Compass")
+      # expect(reviews.first.author).to eq("John Chard")
+      # expect(reviews.last.author).to eq("Ryan")
+      # expect(reviews.first.content.include?(excerpt)).to eq(true)
+    end
   end
 end

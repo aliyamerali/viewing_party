@@ -40,3 +40,19 @@
     </tr>
   <% end %>
 </table>
+
+<br><br>
+
+<h4>Similar Movies</h4>
+<table>
+  <th>Title</th>
+  <th>Summary</th>
+  <th>Vote Average</th>
+  <% @similar_movies.each do |movie| %>
+  <tr>
+    <td><%= movie.title %></td>
+    <td><%= movie.overview %></td>
+    <td><%= movie.vote_average %></td>
+    <% end %>
+  </tr>
+</table>

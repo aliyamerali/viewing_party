@@ -15,6 +15,10 @@ RSpec.describe 'Movie Show page' do
     stub_request(:get, "https://api.themoviedb.org/3/movie/#{@movie_id}/reviews?api_key=#{ENV['MOVIE_API_KEY']}").
         to_return(status: 200, body: response_body3, headers: {})
 
+    response_body = File.read('spec/fixtures/similar_movies.json')
+    stub_request(:get, "https://api.themoviedb.org/3/movie/#{@movie_id}/similar?api_key=#{ENV['MOVIE_API_KEY']}").
+        to_return(status: 200, body: response_body, headers: {})
+
     visit '/register'
 
     fill_in 'user[email]', with: 'amaf@test.com'
@@ -63,6 +67,12 @@ RSpec.describe 'Movie Show page' do
     expect(page).to have_content("A street credibility Pygmallion!")
     expect(page).to have_content("Ryan")
     expect(page).to have_content("You and I are such similar creatures, Vivian.")
+  end
+
+  it 'shows similar movies' do
+    expect(page).to have_content("The Golden Compass")
+    expect(page).to have_content("6.03")
+    expect(page).to have_content("After overhearing a shocking secret, precocious orphan Lyra Belacqua")
   end
 
   it 'has a button to create a new party' do

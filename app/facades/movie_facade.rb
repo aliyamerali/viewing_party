@@ -48,4 +48,11 @@ class MovieFacade
       Review.new(review)
     end
   end
+
+  def self.similar(id)
+    similar_movies = MovieService.similar(id)
+    similar_movies[:results].map do |movie_info|
+      SimilarMovie.new(movie_info)
+    end
+  end
 end

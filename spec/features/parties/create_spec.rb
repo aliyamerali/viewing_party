@@ -15,6 +15,10 @@ RSpec.describe 'Creation of a new viewing party' do
     stub_request(:get, "https://api.themoviedb.org/3/movie/#{@movie_id}/reviews?api_key=#{ENV['MOVIE_API_KEY']}").
     to_return(status: 200, body: response_body3, headers: {})
 
+    response_body = File.read('spec/fixtures/similar_movies.json')
+    stub_request(:get, "https://api.themoviedb.org/3/movie/#{@movie_id}/similar?api_key=#{ENV['MOVIE_API_KEY']}").
+        to_return(status: 200, body: response_body, headers: {})
+
     visit '/register'
 
     email = 'amaf@test.com'
