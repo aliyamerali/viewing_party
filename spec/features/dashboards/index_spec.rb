@@ -82,6 +82,7 @@ RSpec.describe "Dashboard page" do
 
       it 'does not allow user to add friends that are not registered' do
         fill_in :email, with: 'nonuser@test.com'
+        click_button 'Add Friend'
 
         expect(page).to have_content('User does not exist')
       end
