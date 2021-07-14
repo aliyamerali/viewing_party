@@ -13,7 +13,7 @@ class DashboardsController < ApplicationController
       Friend.create!(friender_id: @user.id, friendee_id: @friend.id)
       redirect_to dashboard_path
     else
-      flash[:error] = 'User does not exist'
+      flash[:error] = 'Unable to add friend: User does not exist'
       redirect_to dashboard_path
     end
   end
