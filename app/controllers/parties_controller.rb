@@ -13,8 +13,8 @@ class PartiesController < ApplicationController
       end
       redirect_to dashboard_path
     else
-      redirect_to "/parties/new?movie_id=#{params[:party][:movie_id]}"
       flash[:error] = 'Invalid party parameters'
+      redirect_to "/parties/new?movie_id=#{params[:party][:movie_id]}"
     end
   end
 

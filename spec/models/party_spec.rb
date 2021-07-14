@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Party do
+  describe "validations" do
+    it {should validate_presence_of(:date)}
+    it {should validate_presence_of(:event_time)}
+    it {should validate_presence_of(:movie_id)}
+    it {should validate_presence_of(:host_id)}
+    it {should validate_presence_of(:movie_title)}
+    it {should validate_presence_of(:duration)}
+  end
+
   describe 'relationships' do
     it {should belong_to(:user)}
     it {should have_many(:invitations)}
@@ -30,10 +39,8 @@ RSpec.describe Party do
   end
 
   describe 'instance methods' do
-    it '#host? returns true if the user entered is host, else false' do
-      expect(@party.host?(@user1.id)).to eq(true)
-      expect(@party.host?(@user2.id)).to eq(false)
-      expect(@party.host?(@user3.id)).to eq(false)
+    it '#host returns the user that is hosting' do
+      expect(@party.host).to eq(@user1)
     end
 
     it '#invited_friends returns an array of user objects for friends invited' do

@@ -28,6 +28,19 @@ RSpec.describe "Dashboard page" do
       visit dashboard_path
       expect(page).to have_button("Discover Movies")
     end
+
+    it 'shows viewing parties' do
+      visit '/register'
+
+      email = 'amaf@test.com'
+      fill_in 'user[email]', with: email
+      fill_in 'user[password]', with: '1234'
+      fill_in 'user[password_confirmation]', with: '1234'
+      click_on 'Create User'
+
+      visit dashboard_path
+      expect(page).to have_content("Viewing Parties:")
+    end
   end
 
   describe 'Unauthenticated User view' do
