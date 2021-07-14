@@ -1,73 +1,70 @@
-<% if @user %>
-  <h1>Welcome <%= @user.email %>!</h1>
-  <h2>Your friends:</h2>
 
-  <% if @friends == [] %>
-    You currently have no friends (but AMAFlix still loves you).
-  <% else  %>
-    <ul>
-      <% @friends.each do |friend| %>
-        <li><%= friend.email %></li>
-      <% end %>
-    </ul>
-  <% end %>
-    <br>
-  <%= form_with url: '/add_friend', method: :post, local: true do |f|  %>
-    <%= f.label :email, 'Add friend by email:' %>
-    <%= f.text_field :email %>
-    <%= f.submit "Add Friend" %>
-  <% end %>
-  <br>
-  <%= button_to "Discover Movies", discover_path, method: :get %>
+<h1>Welcome <%= @user.email %>!</h1>
+<h2>Your friends:</h2>
 
-  <br>
-  <h3>Viewing Parties:</h3>
-  <table>
-    <th>Movie</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Host</th>
-    <th>Guests</th>
-    <% @hosting_parties.each do |party| %>
-      <tr id=<%=party.movie_id%>>
-        <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
-        <td> <%= party.date %> </td>
-        <td> <%= party.event_time %> </td>
-        <td>Me!</td>
-        <td>
-          <ul>
-            <% party.invited_friends.each do |friend| %>
-            <li> <%= friend.email %> </li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
+<% if @friends == [] %>
+  You currently have no friends (but AMAFlix still loves you).
+<% else  %>
+  <ul>
+    <% @friends.each do |friend| %>
+      <li><%= friend.email %></li>
     <% end %>
-
-    <% @attending_parties.each do |party| %>
-      <tr id=<%=party.movie_id%>>
-        <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
-        <td> <%= party.date %> </td>
-        <td> <%= party.event_time %> </td>
-        <td> <%= party.host.email %> </td>
-        <td>
-          <ul>
-            <% party.invited_friends.each do |friend| %>
-              <% if friend.id == @user.id %>
-                <li><strong> <%= friend.email %> </strong></li>
-              <% else %>
-                <li> <%= friend.email %> </li>
-              <% end %>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-
-  <br><br>
-  <%= button_to "Log Out", '/logout', method: :delete %>
-<% else %>
-  <%= render partial: '/partials/login_form' %><br>
-  <%= link_to "New to AMAFlix? Register Here.", register_path %>
+  </ul>
 <% end %>
+  <br>
+<%= form_with url: '/add_friend', method: :post, local: true do |f|  %>
+  <%= f.label :email, 'Add friend by email:' %>
+  <%= f.text_field :email %>
+  <%= f.submit "Add Friend" %>
+<% end %>
+<br>
+<%= button_to "Discover Movies", discover_path, method: :get %>
+
+<br>
+<h3>Viewing Parties:</h3>
+<table>
+  <th>Movie</th>
+  <th>Date</th>
+  <th>Time</th>
+  <th>Host</th>
+  <th>Guests</th>
+  <% @hosting_parties.each do |party| %>
+    <tr id=<%=party.movie_id%>>
+      <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
+      <td> <%= party.date %> </td>
+      <td> <%= party.event_time %> </td>
+      <td>Me!</td>
+      <td>
+        <ul>
+          <% party.invited_friends.each do |friend| %>
+          <li> <%= friend.email %> </li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+
+  <% @attending_parties.each do |party| %>
+    <tr id=<%=party.movie_id%>>
+      <td> <%= link_to party.movie_title, "/movies/#{party.movie_id}" %> </td>
+      <td> <%= party.date %> </td>
+      <td> <%= party.event_time %> </td>
+      <td> <%= party.host.email %> </td>
+      <td>
+        <ul>
+          <% party.invited_friends.each do |friend| %>
+            <% if friend.id == @user.id %>
+              <li><strong> <%= friend.email %> </strong></li>
+            <% else %>
+              <li> <%= friend.email %> </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br><br>
+<%= button_to "Log Out", '/logout', method: :delete %>
+<br>

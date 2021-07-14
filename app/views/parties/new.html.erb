@@ -1,39 +1,33 @@
-<% if @user %>
 
-  <h1> <%= "Viewing Party For: #{@movie.title}" %> </h1>
 
-  <%= form_with model: @party, local: true do |f| %>
-    <%= f.hidden_field :movie_id, :value => @movie.id %>
-    <%= f.hidden_field :host_id, :value => @user.id %>
+<h1> <%= "Viewing Party For: #{@movie.title}" %> </h1>
 
-    <%= f.label :movie_title, 'Movie Title:' %>
-    <%= f.text_field :movie_title, :value => @movie.title, :readonly => true  %>
+<%= form_with model: @party, local: true do |f| %>
+  <%= f.hidden_field :movie_id, :value => @movie.id %>
+  <%= f.hidden_field :host_id, :value => @user.id %>
+
+  <%= f.label :movie_title, 'Movie Title:' %>
+  <%= f.text_field :movie_title, :value => @movie.title, :readonly => true  %>
+  <br>
+  <%= f.label :duration, 'Party Duration (minutes):' %>
+  <%= f.number_field :duration, :value => @movie.runtime[:total_in_minutes], min: @movie.runtime[:total_in_minutes]  %>
+  <br>
+  <%= f.label :date, 'Date:' %>
+  <%= f.date_field :date, :required => true  %>
+  <br>
+  <%= f.label :event_time, 'Start Time:' %>
+  <%= f.time_field :event_time, :required => true %>
+  <br>
+  <br>
+  <% if @user.friendees != [] %>
+    <%= f.label :friends, 'Invite Friends' %>
     <br>
-    <%= f.label :duration, 'Party Duration (minutes):' %>
-    <%= f.number_field :duration, :value => @movie.runtime[:total_in_minutes], min: @movie.runtime[:total_in_minutes]  %>
-    <br>
-    <%= f.label :date, 'Date:' %>
-    <%= f.date_field :date, :required => true  %>
-    <br>
-    <%= f.label :event_time, 'Start Time:' %>
-    <%= f.time_field :event_time, :required => true %>
-    <br>
-    <br>
-    <% if @user.friendees != [] %>
-      <%= f.label :friends, 'Invite Friends' %>
+    <% @user.friendees.each do |friend| %>
+      <%= f.check_box(:friend, {multiple: true}, friend.id, nil)%>
+      <%= f.label :friend, friend.email %>
       <br>
-      <% @user.friendees.each do |friend| %>
-        <%= f.check_box(:friend, {multiple: true}, friend.id, nil)%>
-        <%= f.label :friend, friend.email %>
-        <br>
-      <% end %>
     <% end %>
-    <br>
-    <%= f.submit %>
   <% end %>
-
-<% else %>
-
-<h2><%= link_to "Please Register or Login to Continue", root_path%></h2>
-
+  <br>
+  <%= f.submit %>
 <% end %>

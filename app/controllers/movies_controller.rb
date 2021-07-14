@@ -1,5 +1,4 @@
 class MoviesController < ApplicationController
-  # before_action :require_login
 
   def show
     @movie = MovieFacade.details(params[:id])
@@ -16,11 +15,4 @@ class MoviesController < ApplicationController
                 MovieFacade.top40
               end
   end
-
-  # private
-  #
-  # def require_login
-  #   redirect_to root_path if current_user.nil?
-  #   flash[:error] = 'Please log in to continue' if current_user.nil?
-  # end
 end
