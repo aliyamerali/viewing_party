@@ -5,6 +5,7 @@ class Party < ApplicationRecord
   validates :movie_title, presence: true
   validates :host_id, presence: true
   validates :duration, presence: true
+  # validates :duration, numericality: {greater_than_or_equal_to: Movie.runtime[:total_in_minutes]}
 
 
   belongs_to :user, foreign_key: :host_id, class_name: 'User'
