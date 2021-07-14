@@ -85,8 +85,6 @@ RSpec.describe 'Creation of a new viewing party' do
           expect(page).to_not have_content(@friend2.email)
         end
       end
-
     end
-    #checkboxes to add friends
   end
 end

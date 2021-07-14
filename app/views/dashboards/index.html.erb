@@ -24,6 +24,7 @@
     <th>Date</th>
     <th>Time</th>
     <th>Role</th>
+    <th>Host</th>
     <th>Guests</th>
     <% @hosting_parties.each do |party| %>
       <tr id=<%=party.movie_id%>>
@@ -31,6 +32,7 @@
         <td> <%= party.date %> </td>
         <td> <%= party.event_time %> </td>
         <td>Hosting</td>
+        <td>Me!</td>
         <td>
           <ul>
             <% party.invited_friends.each do |friend| %>
@@ -47,6 +49,7 @@
         <td> <%= party.date %> </td>
         <td> <%= party.event_time %> </td>
         <td>Invited</td>
+        <td> <%= party.host.email %> </td>
         <td>
           <ul>
             <% party.invited_friends.each do |friend| %>
