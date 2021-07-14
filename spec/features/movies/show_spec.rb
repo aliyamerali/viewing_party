@@ -68,6 +68,6 @@ RSpec.describe 'Movie Show page' do
   it 'has a button to create a new party' do
     expect(page).to have_button("Create a Viewing Party")
     click_button("Create a Viewing Party")
-    expect(page).to have_current_path(parties_new_path)
+    expect(page).to have_current_path("/parties/new?movie_id=671")
   end
 end
