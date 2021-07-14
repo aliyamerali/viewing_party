@@ -18,7 +18,8 @@ Heroku: [Viewing Party](https://glacial-scrubland-24016.herokuapp.com/)
    [Github](https://github.com/aliyamerali) | [LinkedIn](https://www.linkedin.com/in/aliyamerali/)
 
 ### Schema
-![viewing_party schema](https://user-images.githubusercontent.com/5446926/125483735-9a3fea01-cfe7-40c8-98ce-67e654b71f0b.png)
+![viewing_party schema (2)](https://user-images.githubusercontent.com/5446926/125636470-ace77a8b-9dac-47f6-b477-0ec885811db9.png)
+
 
 ## Local Setup
 
