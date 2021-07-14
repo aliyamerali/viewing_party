@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get '/movies', to: 'movies#search'
   delete '/logout', to: 'sessions#destroy'
   get '/movies/:id', to: 'movies#show'
-  get '/parties/new', to: 'parties#new'
+
+  resources :parties, only: [:new, :create]
 end

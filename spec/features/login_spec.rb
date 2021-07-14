@@ -13,7 +13,6 @@ RSpec.describe "logging in" do
     expect(current_path).to eq(dashboard_path)
     expect(page).to have_content("Welcome amaf@test.com!")
     expect(page).to have_button("Log Out")
-    expect(page).to_not have_field(:email)
     expect(page).to_not have_field(:password)
     expect(page).to_not have_link("New to AMAFlix? Register Here.", :href=>"/register" )
   end
