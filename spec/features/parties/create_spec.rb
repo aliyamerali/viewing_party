@@ -79,7 +79,7 @@ RSpec.describe 'Creation of a new viewing party' do
           expect(page).to have_link("Harry Potter and the Philosopher's Stone", :href => '/movies/671')
           expect(page).to have_content('7/25/2021')
           expect(page).to have_content('3:30 PM')
-          expect(page).to have_content('Hosting')
+          expect(page).to have_content('Me!')
           expect(page).to have_content(@friend1.email)
           expect(page).to have_content(@friend3.email)
           expect(page).to_not have_content(@friend2.email)
