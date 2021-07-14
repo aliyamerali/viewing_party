@@ -24,6 +24,11 @@ class MovieService
     parse(response)
   end
 
+  def self.similar(id)
+    response = Faraday.get "https://api.themoviedb.org/3/movie/#{id}/similar?api_key=#{ENV['MOVIE_API_KEY']}"
+    parse(response)
+  end
+
   def private_class_method.parse(response)
     JSON.parse(response.body, symbolize_names: true)
   end

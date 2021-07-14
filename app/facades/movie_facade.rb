@@ -48,4 +48,8 @@ class MovieFacade
       Review.new(review)
     end
   end
+
+  def self.similar(id)
+    Movie.new(MovieService.similar(id))
+  end
 end

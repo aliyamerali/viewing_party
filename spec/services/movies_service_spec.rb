@@ -70,15 +70,19 @@ RSpec.describe 'Movies API Service' do
       expect(reviews[:results].first).to have_key(:author)
       expect(reviews[:results].first).to have_key(:content)
     end
+
     it '.similar returns similar movies for a given movie' do
       movie_id = 671
-      response_body = File.read('spec/fixtures/similar_movies_1.json')
+      response_body = File.read('spec/fixtures/similar_movies.json')
       stub_request(:get, "https://api.themoviedb.org/3/movie/#{movie_id}/similar?api_key=#{ENV['MOVIE_API_KEY']}").
           to_return(status: 200, body: response_body, headers: {})
 
-      similar = MovieService.similar(movie_id)
-      expect(similar.class).to eq(Array)
-
+      similar_movies = MovieService.similar(movie_id)
+      expect(similar_movies.class).to eq(Hash)
+      expect(similar_movies[:results].class).to eq(Array)
+      expect(similar_movies[:results].first).to have_key(:id)
+      expect(similar_movies[:results].first).to have_key(:overview)
+      expect(similar_movies[:results].first).to have_key(:vote_average)
     end
   end
 end

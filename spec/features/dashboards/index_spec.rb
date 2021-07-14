@@ -77,7 +77,7 @@ RSpec.describe "Dashboard page" do
       expect(page).to have_content('You currently have no friends (but AMAFlix still loves you).')
       expect(page).to have_field(:email)
       fill_in :email, with: @email1
-      expect(page).to have_button('Add Friend') #ADD HREF LINK HERE
+      expect(page).to have_button('Add Friend')
       click_button 'Add Friend'
       expect(page).to have_content(@email1)
       expect(page).to_not have_content('You currently have no friends (but AMAFlix still loves you).')
