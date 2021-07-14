@@ -2,6 +2,8 @@
 <p class="description">AMAFlix is an app to create movie-watching parties with friends.</p>
 
 <% if current_user %>
+  <%= link_to "Your Dashboard", dashboard_path %>
+  <br><br>
   <%= button_to "Log Out", '/logout', method: :delete %>
 <% else %>
   <%= render partial: '/partials/login_form' %><br>
