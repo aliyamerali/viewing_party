@@ -49,4 +49,12 @@ RSpec.describe 'top 40 functionality' do
     expect(page).to have_link("The Shawshank Redemption", :href=>'/movies/278')
     expect(page).to have_link("Zack Snyder's Justice League", :href=>'/movies/791373')
   end
+
+  it 'unauthenticated users do not see search capability' do
+    visit root_path
+    click_button("Log Out")
+
+    visit discover_path
+    expect(page).to have_current_path(root_path)
+  end
 end

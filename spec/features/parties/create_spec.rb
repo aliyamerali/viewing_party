@@ -40,59 +40,57 @@ RSpec.describe 'Creation of a new viewing party' do
     click_button "Create a Viewing Party"
   end
 
-  describe 'Authenticated user flow' do
-    it 'clicking "Create a Viewing Party" takes you to a new party page for the movie' do
+  it 'clicking "Create a Viewing Party" takes you to a new party page for the movie' do
+    expect(page).to have_current_path("/parties/new?movie_id=#{@movie_id}")
+    expect(page).to have_content("Viewing Party For: Harry Potter and the Philosopher's Stone")
+  end
+
+  describe 'has fields to create a new party' do
+    it 'has a duration field with a default and minimum value of movie runtime' do
+      expect(page).to have_field('party[duration]', :with => 152)
+    end
+
+    it 'has additional required fields' do
+      expect(page).to have_field 'party[date]'
+      expect(page).to have_field 'party[event_time]'
+    end
+
+    it 'has checkboxes for all a user\'s friends' do
+      expect(page).to have_css("[value='#{@friend1.id}']")
+      expect(page).to have_css("[value='#{@friend2.id}']")
+      expect(page).to have_css("[value='#{@friend3.id}']")
+    end
+
+    it 'doesn\'t allow submission without all fields' do
+      fill_in 'party[duration]', with: 153
+      fill_in 'party[date]', with: '7/25/2021'
+      find(:css, "[value='#{@friend1.id}']").set(true)
+      find(:css, "[value='#{@friend3.id}']").set(true)
+      click_button("Create Party")
+
+      expect(page).to have_content('Invalid party parameters')
       expect(page).to have_current_path("/parties/new?movie_id=#{@movie_id}")
-      expect(page).to have_content("Viewing Party For: Harry Potter and the Philosopher's Stone")
     end
+  end
 
-    describe 'has fields to create a new party' do
-      it 'has a duration field with a default and minimum value of movie runtime' do
-        expect(page).to have_field('party[duration]', :with => 152)
-      end
+  describe 'submitting the form creates a new party and invites selected friends' do
+    it 'redirects to the dashboard on submission and shows new party' do
+      fill_in 'party[duration]', with: 170
+      fill_in 'party[date]', with: '7/25/2021'
+      fill_in 'party[event_time]', with: '3:30 PM'
+      find(:css, "[value='#{@friend1.id}']").set(true)
+      find(:css, "[value='#{@friend3.id}']").set(true)
+      click_button("Create Party")
 
-      it 'has additional required fields' do
-        expect(page).to have_field 'party[date]'
-        expect(page).to have_field 'party[event_time]'
-      end
-
-      it 'has checkboxes for all a user\'s friends' do
-        expect(page).to have_css("[value='#{@friend1.id}']")
-        expect(page).to have_css("[value='#{@friend2.id}']")
-        expect(page).to have_css("[value='#{@friend3.id}']")
-      end
-
-      it 'doesn\'t allow submission without all fields' do
-        fill_in 'party[duration]', with: 153
-        fill_in 'party[date]', with: '7/25/2021'
-        find(:css, "[value='#{@friend1.id}']").set(true)
-        find(:css, "[value='#{@friend3.id}']").set(true)
-        click_button("Create Party")
-
-        expect(page).to have_content('Invalid party parameters')
-        expect(page).to have_current_path("/parties/new?movie_id=#{@movie_id}")
-      end
-    end
-
-    describe 'submitting the form creates a new party and invites selected friends' do
-      it 'redirects to the dashboard on submission and shows new party' do
-        fill_in 'party[duration]', with: 170
-        fill_in 'party[date]', with: '7/25/2021'
-        fill_in 'party[event_time]', with: '3:30 PM'
-        find(:css, "[value='#{@friend1.id}']").set(true)
-        find(:css, "[value='#{@friend3.id}']").set(true)
-        click_button("Create Party")
-
-        expect(page).to have_current_path("/dashboard")
-        within("#671") do
-          expect(page).to have_link("Harry Potter and the Philosopher's Stone", :href => '/movies/671')
-          expect(page).to have_content('7/25/2021')
-          expect(page).to have_content('3:30 PM')
-          expect(page).to have_content('Me!')
-          expect(page).to have_content(@friend1.email)
-          expect(page).to have_content(@friend3.email)
-          expect(page).to_not have_content(@friend2.email)
-        end
+      expect(page).to have_current_path("/dashboard")
+      within("#671") do
+        expect(page).to have_link("Harry Potter and the Philosopher's Stone", :href => '/movies/671')
+        expect(page).to have_content('7/25/2021')
+        expect(page).to have_content('3:30 PM')
+        expect(page).to have_content('Me!')
+        expect(page).to have_content(@friend1.email)
+        expect(page).to have_content(@friend3.email)
+        expect(page).to_not have_content(@friend2.email)
       end
     end
   end

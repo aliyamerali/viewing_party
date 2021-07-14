@@ -51,8 +51,16 @@ RSpec.describe 'search movies' do
   it 'each title on movies page links to the movies detail page' do
     fill_in :search, with: @query
     click_button('Find Movies')
-    
+
     expect(page).to have_link("Perfume: The Story of a Murderer", :href=>'/movies/1427')
     expect(page).to have_link("The Story of Mother's Day", :href=>'/movies/828714')
+  end
+
+  it 'unauthenticated users do not see search capability' do
+    visit root_path
+    click_button("Log Out")
+
+    visit discover_path
+    expect(page).to have_current_path(root_path)
   end
 end
