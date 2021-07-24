@@ -1,9 +1,5 @@
 [![](https://img.shields.io/badge/-📓%20Turing%20School%20Project-000?style=plastic)](https://backend.turing.io/module3/projects/viewing_party)<br/>
 
-Badge for 100% test coverage
-Badge for readability / TDD process
-Badge/Link for Live on Heroku 
-
 # Viewing Party
 
 Viewing Party is an application that enables users to search and review movie data, add other registered users as friends, and create viewing parties with friends around a given movie. It is based on the [viewing party project](https://backend.turing.io/module3/projects/viewing_party) used for Turing's Backend Module 3.
